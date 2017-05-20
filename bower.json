@@ -1,0 +1,29 @@
+{
+  "name": "ecommerce-demo",
+  "description": "Demonstraton of an e-commerce website using AngularJS, NodeJS and ExpressJS",
+  "main": "server.js",
+  "authors": [
+    "Jennifer Bland <ratracegrad@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "e-commerce",
+    "nodejs",
+    "angularjs",
+    "expressjs",
+    "jennifer",
+    "bland"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-ui-router": "^1.0.3"
+  }
+}

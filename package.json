@@ -1,0 +1,28 @@
+{
+  "name": "ecommerce-demo",
+  "version": "1.0.0",
+  "description": "Demonstraton of an e-commerce website using AngularJS, NodeJS and ExpressJS",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server"
+  },
+  "keywords": [
+    "e-commerce",
+    "nodejs",
+    "angularjs",
+    "expressjs",
+    "jennifer",
+    "bland"
+  ],
+  "author": "Jennifer Bland <ratracegrad@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "bower": "^1.8.0",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.26",
+    "morgan": "^1.8.1"
+  }
+}
