@@ -2,17 +2,37 @@
 <html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="ecommerce demonstration application using AngularJS, NodeJS, ExpressJS">
+    <meta name="author" content="Jennifer Bland">
     <title>eCommerce Demo | Jennifer Bland</title>
+    <link rel="icon" href="app/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="app/assets/images/favicon.ico" type="image/x-icon" />
+
+    <!-- stylesheets below -->
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="app/app.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="vendor/html5shiv/dist/html5shiv.js"></script>
+    <script src="vendor/respond/dest/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body ng-controller="mainController">
+    <navigation></navigation>
     <h1>Categories</h1>
     <ul ng-repeat="category in categories">
         <li>{{ category.name }} - {{ category.num }}</li>
     </ul>
+
+    <footer></footer>
+
     <script src="vendor/angular/angular.js"></script>
     <script src="app/app.js"></script>
+    <script src="app/components/nav/nav.component.js"></script>
+    <script src="app/components/footer/footer.component.js"></script>
 </body>
 </html>

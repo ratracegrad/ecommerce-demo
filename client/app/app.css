@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+
+}
+
+/* footer  */
+footer {
+    width: 100vw;
+    background-color: #005dab;
+    height: 50px;
+}
+footer p {
+    text-align: center;
+    color: #fefefe;
+    line-height: 50px;
+}
