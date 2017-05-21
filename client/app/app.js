@@ -2,7 +2,7 @@ angular.module('app', [])
   .controller('mainController', ['$scope', 'databaseService', function($scope, databaseService) {
     $scope.categories = [];
     $scope.items = [];
-    $scope.currentPage = 1;
+    $scope.currentPage = 0;
     $scope.currentCategory = "All";
     $scope.itemsPerPage = 5;
     $scope.numItems = 0;
@@ -22,7 +22,7 @@ angular.module('app', [])
     }
 
     function loadItems() {
-      databaseService.getItems($scope.currentCategory, $scope.page, $scope.currentCategory)
+      databaseService.getItems($scope.currentCategory, $scope.currentPage, $scope.itemsPerPage)
         .then((items) => {
           $scope.items = items;
         });
@@ -36,6 +36,11 @@ angular.module('app', [])
         })
     }
 
+    $scope.getPage = (n) => {
+      $scope.currentPage = n - 1;
+      loadItems();
+    }
+
     $scope.range = function() {
       const arr = [];
       for (let i = 1; i <= $scope.numPages; i++) {
@@ -45,7 +50,7 @@ angular.module('app', [])
     }
 
   }])
-  .service('databaseService', function($http, $q) {
+  .service('databaseService', ["$http", "$q", function($http, $q) {
     return({
       getCategories: getCategories,
       getItems: getItems,
@@ -64,7 +69,7 @@ angular.module('app', [])
     function getItems(currentCategory, page, itemsPerPage) {
       const request = $http({
         method: "get",
-        url: `/api/getitems?currentCategory=${currentCategory}&&page=${page}&&itemsPerPage=${itemsPerPage}`
+        url: `/api/getitems?category=${currentCategory}&&page=${page}&&limit=${itemsPerPage}`
       });
 
       return (request.then(handleSuccess, handleError));
@@ -100,4 +105,4 @@ angular.module('app', [])
       return( response.data );
     }
 
-  });
+  }]);
