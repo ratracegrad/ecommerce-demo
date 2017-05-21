@@ -105,9 +105,16 @@ const mainService = function($http, $q) {
   }
 }
 
-angular.module('app',[])
+angular.module('myApp')
   .component('myMain', {
     controller: mainController,
     templateUrl: 'app/components/main/main.html'
   })
-  .service('databaseService', mainService);
+  .service('databaseService', mainService)
+  .config(function($stateProvider) {
+    $stateProvider
+      .state('main', {
+        url: '/',
+        component: 'myMain'
+      })
+  })
