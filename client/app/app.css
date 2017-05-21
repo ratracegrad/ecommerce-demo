@@ -12,6 +12,11 @@ body {
     padding-top: 70px;
 }
 
+/* pagination */
+.pagination>li>a {
+    cursor: pointer;
+}
+
 /* footer  */
 footer {
     width: 100vw;
@@ -23,6 +28,8 @@ footer {
     line-height: 50px;
     font-weight: 700;
 }
+
+
 
 .slide-image {
     width: 100%;
