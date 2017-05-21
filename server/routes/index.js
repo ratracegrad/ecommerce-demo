@@ -57,16 +57,16 @@ router.get('/categories', (req, res) => {
 });
 
 router.get('/getitems', (req, res) => {
-  const category = req.params.category || 'All';
-  const page = req.params.page ? Number(req.params.page) : 0;
-  const limit = req.params.itemsPerPage ? Number(req.params.itemsPerPage) : 5;
-  const skip = page * limit;
+  let category = req.query.category || 'All';
+  let page = req.query.page ? Number(req.query.page) : 0;
+  let limit = req.query.limit ? Number(req.query.limit) : 5;
+  let skip = page * limit;
 
   connectToDatabase()
     .then((db) => {
 
-      if (category.toLowerCase() === 'all') {
-        db.collection('item').find({}).skip(skip).limit(limit).sort({ _id: 1 })
+      const findCondition = (category.toLowerCase() === 'all') ? {} : { category: category };
+        db.collection('item').find(findCondition).skip(skip).limit(limit).sort({ _id: 1 })
           .toArray((err, docs) => {
             if (err) {
               return res.status(500).send(`Error: ${err}`);
@@ -74,17 +74,6 @@ router.get('/getitems', (req, res) => {
 
             res.json(docs);
           })
-      } else {
-        db.collection('item').find({ category: category }).skip(skip).limit(limit).sort({ _id: 1 })
-          .toArray((err, docs) => {
-            if (err) {
-              return res.status(500).send(`Error: ${err}`);
-            }
-
-            res.json(docs);
-          })
-      }
-
     })
     .catch((err) => {
       res.status(500).send(`Error connecting to database: ${err}`);
@@ -93,11 +82,11 @@ router.get('/getitems', (req, res) => {
 
 router.get('/getnumitems', (req, res) => {
   const category = req.params.currentCategory || 'All';
-  const findSearch = (category.toLowerCase() === 'all') ? {} : { category: category };
+  const findCondition = (category.toLowerCase() === 'all') ? {} : { category: category };
 
   connectToDatabase()
     .then((db) => {
-      db.collection('item').find(findSearch).toArray((err, docs) => {
+      db.collection('item').find(findCondition).toArray((err, docs) => {
         if (err) {
           return res.status(500).send(`Error: ${err}`);
         }
@@ -110,5 +99,9 @@ router.get('/getnumitems', (req, res) => {
     });
 
 });
+
+router.get('/item/:id', (req, res) => {
+
+})
 
 module.exports = router;

@@ -48,10 +48,10 @@
             </div>
 
             <div class="col-md-10" >
-                <div ng-repeat="item in items">
+                <div ng-repeat="item in items" ng-model="items">
                     <div class="row" >
                         <div class="col-md-7">
-                            <a ng-href="/item/{{item._id}}">
+                            <a ng-href="/item/{{item._id}} ng-model="items">
                                 <img class="img-responsive" src="{{item.img_url}}" alt="">
                             </a>
                         </div>
@@ -70,8 +70,8 @@
                 <div class="row text-center">
                     <div class="col-xs-12">
                         <ul class="pagination">
-                            <li ng-repeat="n in range()" ng-class="currentPage == n ? 'active' : 'inactive'">
-                                <a ng-href="/?page={{n}}&currentCategory={{currentCategory}}">{{n}}</a>
+                            <li ng-repeat="n in range()" ng-class="currentPage == (n - 1) ? 'active' : 'inactive'">
+                                <a ng-click="getPage(n)">{{n}}</a>
                             </li>
                         </ul>
                     </div>
@@ -80,6 +80,7 @@
                 <div class="text-center">
                     <i>{{ numItems }} Products</i>
                 </div>
+
             </div>
         </div>
     </div>
