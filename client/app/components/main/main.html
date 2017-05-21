@@ -1,0 +1,60 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">{{currentCategory}}</li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-2">
+            <div class="list-group" >
+                <a ng-repeat="category in categories" ng-href="/?category={{category._id}}" ng-class="currentCategory == category._id ? 'list-group-item active' : 'list-group-item inactive'">
+                    <span class="badge">{{category.num}}</span>
+                    {{category._id}}
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-10" >
+            <div ng-repeat="item in items" ng-model="items">
+                <div class="row" >
+                    <div class="col-md-7">
+                        <a ng-href="/item/{{item._id}} ng-model="items">
+                        <img class="img-responsive" src="{{item.img_url}}" alt="">
+                        </a>
+                    </div>
+
+                    <div class="col-md-5">
+                        <h3><a href="/item/{{item._id}}">{{item.title}}</a></h3>
+                        <h4>{{item.slogan}}</h4>
+                        <p>{{item.description}}</p>
+                        <a class="btn btn-primary" href="/item/{{item._id}}">View Product > </a>
+                    </div>
+
+                </div>
+                <hr>
+            </div>
+
+            <div class="row text-center">
+                <div class="col-xs-12">
+                    <ul class="pagination">
+                        <li ng-repeat="n in range()" ng-class="currentPage == (n - 1) ? 'active' : 'inactive'">
+                            <a ng-click="getPage(n)">{{n}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <i>{{ numItems }} Products</i>
+            </div>
+
+        </div>
+    </div>
+</div>
