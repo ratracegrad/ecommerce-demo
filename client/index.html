@@ -1,99 +1,38 @@
 <!doctype html>
 <html lang="en" ng-app="app">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="ecommerce demonstration application using AngularJS, NodeJS, ExpressJS">
-    <meta name="author" content="Jennifer Bland">
-    <title>eCommerce Demo | Jennifer Bland</title>
-    <link rel="icon" href="app/assets/images/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="app/assets/images/favicon.ico" type="image/x-icon" />
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="description" content="ecommerce demonstration application using AngularJS, NodeJS, ExpressJS">
+        <meta name="author" content="Jennifer Bland">
+        <title>eCommerce Demo | Jennifer Bland</title>
+        <link rel="icon" href="app/assets/images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="app/assets/images/favicon.ico" type="image/x-icon" />
 
-    <!-- stylesheets below -->
-    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="app/app.css">
+        <!-- stylesheets below -->
+        <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="app/app.css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="vendor/html5shiv/dist/html5shiv.js"></script>
-    <script src="vendor/respond/dest/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body ng-controller="mainController">
-    <my-navigation></my-navigation>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="vendor/html5shiv/dist/html5shiv.js"></script>
+        <script src="vendor/respond/dest/respond.min.js"></script>
+        <![endif]-->
+    </head>
 
-    <div class="container">
+    <body>
+        <my-navigation></my-navigation>
+        <my-main></my-main>
+        <my-footer></my-footer>
 
-        <div class="row">
-            <div class="col-xs-12">
-                <ol class="breadcrumb">
-                    <li><a href="/">Home</a></li>
-                    <li class="active">{{currentCategory}}</li>
-                </ol>
-            </div>
+        <!-- Scripts loaded below for dependencies -->
+        <script src="vendor/angular/angular.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/components/main/main.component.js"></script>
+        <script src="app/components/nav/nav.component.js"></script>
+        <script src="app/components/footer/footer.component.js"></script>
+    </body>
 
-        </div>
-
-        <div class="row">
-
-            <div class="col-md-2">
-                <div class="list-group" >
-                    <a ng-repeat="category in categories" ng-href="/?category={{category._id}}" ng-class="currentCategory == category._id ? 'list-group-item active' : 'list-group-item inactive'">
-                        <span class="badge">{{category.num}}</span>
-                        {{category._id}}
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-10" >
-                <div ng-repeat="item in items" ng-model="items">
-                    <div class="row" >
-                        <div class="col-md-7">
-                            <a ng-href="/item/{{item._id}} ng-model="items">
-                                <img class="img-responsive" src="{{item.img_url}}" alt="">
-                            </a>
-                        </div>
-
-                        <div class="col-md-5">
-                            <h3><a href="/item/{{item._id}}">{{item.title}}</a></h3>
-                            <h4>{{item.slogan}}</h4>
-                            <p>{{item.description}}</p>
-                            <a class="btn btn-primary" href="/item/{{item._id}}">View Product > </a>
-                        </div>
-
-                    </div>
-                    <hr>
-                </div>
-
-                <div class="row text-center">
-                    <div class="col-xs-12">
-                        <ul class="pagination">
-                            <li ng-repeat="n in range()" ng-class="currentPage == (n - 1) ? 'active' : 'inactive'">
-                                <a ng-click="getPage(n)">{{n}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <i>{{ numItems }} Products</i>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-
-    <!--<my-main></my-main>-->
-    <my-footer></my-footer>
-
-    <script src="vendor/angular/angular.js"></script>
-    <script src="app/app.js"></script>
-    <!--<script src="app/components/main/main.component.js"></script>-->
-    <script src="app/components/nav/nav.component.js"></script>
-    <script src="app/components/footer/footer.component.js"></script>
-</body>
 </html>
