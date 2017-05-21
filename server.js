@@ -3,7 +3,7 @@
 /* require modules */
 const app = require('./server/app');
 const http = require('http');
-const port = process.env.PORT || 3000; // TODO port this in .env
+const port = process.env.PORT || 3000;
 
 /* start server and set event listening function */
 const server = http.createServer(app);
