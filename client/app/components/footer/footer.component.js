@@ -1,4 +1,4 @@
 angular.module('app')
-  .component('footer', {
+  .component('myFooter', {
     templateUrl: "app/components/footer/footer.html"
   })

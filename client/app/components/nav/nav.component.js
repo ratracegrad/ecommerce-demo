@@ -1,4 +1,4 @@
 angular.module('app')
-  .component('navigation', {
+  .component('myNavigation', {
     templateUrl: "app/components/nav/nav.html"
   })
