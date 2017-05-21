@@ -1,9 +1,18 @@
 angular.module('app', [])
   .controller('mainController', ['$scope', 'databaseService', function($scope, databaseService) {
     $scope.categories = [];
+    $scope.items = [];
+    $scope.currentPage = 1;
+    $scope.currentCategory = "All";
+    $scope.itemsPerPage = 5;
+    $scope.numItems = 0;
+    $scope.numPages = 1;
+
 
     /* must have list to get started */
     loadCategories();
+    loadItems();
+    loadNumItems();
 
     function loadCategories() {
       databaseService.getCategories()
@@ -12,16 +21,59 @@ angular.module('app', [])
         })
     }
 
+    function loadItems() {
+      databaseService.getItems($scope.currentCategory, $scope.page, $scope.currentCategory)
+        .then((items) => {
+          $scope.items = items;
+        });
+    }
+
+    function loadNumItems() {
+      databaseService.getNumItems($scope.currentCategory)
+        .then((numItems) => {
+          $scope.numItems = numItems.count;
+          $scope.numPages = Math.ceil(Number($scope.numItems / $scope.itemsPerPage));
+        })
+    }
+
+    $scope.range = function() {
+      const arr = [];
+      for (let i = 1; i <= $scope.numPages; i++) {
+        arr.push(i);
+      }
+      return arr;
+    }
+
   }])
   .service('databaseService', function($http, $q) {
     return({
-      getCategories: getCategories
+      getCategories: getCategories,
+      getItems: getItems,
+      getNumItems: getNumItems
     });
 
     function getCategories() {
       const request = $http({
         method: "get",
         url: "/api/categories"
+      });
+
+      return (request.then(handleSuccess, handleError));
+    }
+
+    function getItems(currentCategory, page, itemsPerPage) {
+      const request = $http({
+        method: "get",
+        url: `/api/getitems?currentCategory=${currentCategory}&&page=${page}&&itemsPerPage=${itemsPerPage}`
+      });
+
+      return (request.then(handleSuccess, handleError));
+    }
+
+    function getNumItems(currentCategory) {
+      const request = $http({
+        method: "get",
+        url: `/api/getnumitems?currentCategory=${currentCategory}`
       });
 
       return (request.then(handleSuccess, handleError));
