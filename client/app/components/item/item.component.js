@@ -1,4 +1,4 @@
-const itemController = function($scope, $stateParams) {
+const itemController = function($scope, $stateParams, databaseService) {
 
   $scope.itemId =  $stateParams.itemId;
 
