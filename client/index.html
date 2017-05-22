@@ -1,12 +1,15 @@
 <!doctype html>
-<html lang="en" ng-app="app">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="description" content="ecommerce demonstration application using AngularJS, NodeJS, ExpressJS">
         <meta name="author" content="Jennifer Bland">
+        <base href="/">
+
         <title>eCommerce Demo | Jennifer Bland</title>
+
         <link rel="icon" href="app/assets/images/favicon.ico" type="image/x-icon" />
         <link rel="shortcut icon" href="app/assets/images/favicon.ico" type="image/x-icon" />
 
@@ -20,17 +23,22 @@
         <script src="vendor/html5shiv/dist/html5shiv.js"></script>
         <script src="vendor/respond/dest/respond.min.js"></script>
         <![endif]-->
+
     </head>
 
-    <body>
+    <body ng-app="myApp">
         <my-navigation></my-navigation>
-        <my-main></my-main>
+       
+         <ui-view></ui-view>
+
         <my-footer></my-footer>
 
         <!-- Scripts loaded below for dependencies -->
         <script src="vendor/angular/angular.js"></script>
+        <script src="vendor/angular-ui-router/release/angular-ui-router.js"></script>
         <script src="app/app.js"></script>
         <script src="app/components/main/main.component.js"></script>
+        <script src="app/components/item/item.component.js"></script>
         <script src="app/components/nav/nav.component.js"></script>
         <script src="app/components/footer/footer.component.js"></script>
     </body>

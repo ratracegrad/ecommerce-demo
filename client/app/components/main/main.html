@@ -25,16 +25,16 @@
             <div ng-repeat="item in items" ng-model="items">
                 <div class="row" >
                     <div class="col-md-7">
-                        <a ng-href="/item/{{item._id}} ng-model="items">
+                        <a ui-sref="item({itemId:item._id})" ng-model="items">
                         <img class="img-responsive" src="{{item.img_url}}" alt="">
                         </a>
                     </div>
 
                     <div class="col-md-5">
-                        <h3><a href="/item/{{item._id}}">{{item.title}}</a></h3>
+                        <h3><a ui-sref="item({itemId:item._id})">{{item.title}}</a></h3>
                         <h4>{{item.slogan}}</h4>
                         <p>{{item.description}}</p>
-                        <a class="btn btn-primary" href="/item/{{item._id}}">View Product > </a>
+                        <a class="btn btn-primary" ui-sref="item({itemId:item._id})"">View Product > </a>
                     </div>
 
                 </div>
