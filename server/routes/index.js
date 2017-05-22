@@ -1,14 +1,14 @@
 'use strict';
 
+require('dotenv').config();
 const router = require('express').Router();
 const MongoClient = require('mongodb').MongoClient;
-const dbURI = process.env.DBURI;
-console.log('dbURI', dbURI); // TODO make this work
+const dbURI = process.env.MONGODB_URI;
 
 const connectToDatabase = () => {
   return new Promise((resolve, reject) => {
 
-    MongoClient.connect("mongodb://localhost:27017/mongomart", (err, db) => {
+    MongoClient.connect(dbURI, (err, db) => {
       if (err) {
         reject(err)
       }
@@ -140,6 +140,6 @@ router.get('/getrelateditems', (req, res) => {
     .catch((err) => {
       res.status(500).send(`Error connecting to database: ${err}`);
     });
-})
+});
 
 module.exports = router;
