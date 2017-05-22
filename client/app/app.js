@@ -2,7 +2,9 @@ const databaseService = function($http, $q) {
   return({
     getCategories: getCategories,
     getItems: getItems,
-    getNumItems: getNumItems
+    getNumItems: getNumItems,
+    getItem: getItem,
+    getRelatedItems: getRelatedItems
   });
 
   function getCategories() {
@@ -27,6 +29,24 @@ const databaseService = function($http, $q) {
     const request = $http({
       method: "get",
       url: `/api/getnumitems?currentCategory=${currentCategory}`
+    });
+
+    return (request.then(handleSuccess, handleError));
+  }
+
+  function getItem(itemId) {
+    const request = $http({
+      method: "get",
+      url: `/api/getitem/${itemId}`
+    });
+
+    return (request.then(handleSuccess, handleError));
+  }
+
+  function getRelatedItems() {
+    const request = $http({
+      method: 'get',
+      url: '/api/getrelateditems'
     });
 
     return (request.then(handleSuccess, handleError));
