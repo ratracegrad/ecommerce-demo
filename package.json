@@ -4,6 +4,8 @@
   "description": "Demonstraton of an e-commerce website using AngularJS, NodeJS and ExpressJS",
   "main": "server.js",
   "scripts": {
+    "preinstall": "npm install bower -g",
+    "postinstall": "bower install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server"
   },
