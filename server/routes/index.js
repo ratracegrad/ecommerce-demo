@@ -100,8 +100,46 @@ router.get('/getnumitems', (req, res) => {
 
 });
 
-router.get('/item/:id', (req, res) => {
+router.get('/getitem/:id', (req, res) => {
+  const itemId = parseInt(req.params.id);
 
+  connectToDatabase()
+    .then((db) => {
+      db.collection('item').findOne({ _id: itemId }, (err, doc) => {
+        if (err) {
+          return res.status(500).send(`Error: ${err}`);
+        }
+
+        /* EXCEPTION: document not found */
+        if (doc === null) {
+          return res.status(404).send('Item not found');
+        }
+
+        res.json(doc);
+      })
+    })
+    .catch((err) => {
+      res.status(500).send(`Error connecting to database: ${err}`);
+    });
+
+});
+
+router.get('/getrelateditems', (req, res) => {
+
+  connectToDatabase()
+    .then((db) => {
+      db.collection('item').find({}).limit(4)
+        .toArray((err, docs) => {
+          if (err) {
+            return res.status(500).send(`Error: ${err}`);
+          }
+
+          res.json(docs);
+        })
+    })
+    .catch((err) => {
+      res.status(500).send(`Error connecting to database: ${err}`);
+    });
 })
 
 module.exports = router;

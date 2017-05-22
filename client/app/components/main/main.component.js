@@ -38,7 +38,7 @@ const mainController = function($scope, databaseService) {
   $scope.getPage = (n) => {
     $scope.currentPage = n - 1;
     loadItems();
-  }
+  };
 
   $scope.range = function() {
     const arr = [];
@@ -48,7 +48,7 @@ const mainController = function($scope, databaseService) {
     return arr;
   }
 
-}
+};
 
 angular.module('myApp')
   .component('myMain', {
@@ -61,4 +61,4 @@ angular.module('myApp')
         url: '/',
         component: 'myMain'
       })
-  })
+  });
