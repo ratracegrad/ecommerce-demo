@@ -44,6 +44,10 @@
                     {{item.description}}
                 </p>
 
+                <p>
+                    <strong>Price: {{item.price | currency }}</strong>
+                </p>
+
                 <!--<form action="/user/{{userId}}/cart/items/{{item._id}}" role="form" method="post">-->
                 <form>
                     <button class="btn btn-primary" type="submit">

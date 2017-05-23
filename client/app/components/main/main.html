@@ -33,6 +33,7 @@
                     <div class="col-md-5">
                         <h3><a ui-sref="item({itemId:item._id})">{{item.title}}</a></h3>
                         <h4>{{item.slogan}}</h4>
+                        <p><strong>{{item.price | currency}}</strong></p>
                         <p>{{item.description}}</p>
                         <a class="btn btn-primary" ui-sref="item({itemId:item._id})">View Product <span class="glyphicon glyphicon-chevron-right"></span> </a>
                     </div>
