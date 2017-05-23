@@ -12,9 +12,44 @@ body {
     padding-top: 70px;
 }
 
+/* navigation */
+.navbar-inverse {
+    background-color: #da1f47;
+    border-color: #da1f47;
+}
+
 /* pagination */
 .pagination>li>a {
     cursor: pointer;
+    color: #da1f47;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background-color: #da1f47;
+    border-color: #da1f47;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: #da1f47;
+    border-color: #da1f47;
+}
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+    z-index: 2;
+    color: #e54769;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+/* other stuff */
+.breadcrumb {
+    border-radius: 8px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+}
+.badge {
+    background-color: #da1f47
 }
 
 /* footer  */
@@ -28,6 +63,31 @@ footer {
     line-height: 50px;
     font-weight: 700;
 }
+
+/* buttons */
+.btn-primary {
+    color: #fff;
+    background-color: #da1f47;
+    border-color: #da1f47;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #e54769;
+    border-color: #e54769;
+}
+
+/*  links and hr */
+a {
+    color: #da1f47;
+}
+a:hover {
+    color: #e54769;
+    border-color: #e54769;
+}
+hr {
+    border-top: 1px solid #e54769;
+}
+
 
 
 
