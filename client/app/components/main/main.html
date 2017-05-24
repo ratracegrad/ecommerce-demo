@@ -14,7 +14,7 @@
 
         <div class="col-md-2">
             <div class="list-group" >
-                <a ng-repeat="category in categories" ng-href="/?category={{category._id}}" ng-class="currentCategory == category._id ? 'list-group-item active' : 'list-group-item inactive'">
+                <a ng-repeat="category in categories" ng-click="changeCategory(category._id)" ng-class="currentCategory == category._id ? 'list-group-item active' : 'list-group-item inactive'">
                     <span class="badge">{{category.num}}</span>
                     {{category._id}}
                 </a>

@@ -48,6 +48,12 @@ const mainController = function($scope, databaseService) {
     return arr;
   }
 
+  $scope.changeCategory = function(newCategory) {
+    $scope.currentCategory = newCategory;
+    loadItems();
+    loadNumItems();
+  }
+
 };
 
 angular.module('myApp')
