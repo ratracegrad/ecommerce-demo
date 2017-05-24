@@ -81,7 +81,7 @@ router.get('/getitems', (req, res) => {
 });
 
 router.get('/getnumitems', (req, res) => {
-  const category = req.params.currentCategory || 'All';
+  const category = req.query.currentCategory || 'All';
   const findCondition = (category.toLowerCase() === 'all') ? {} : { category: category };
 
   connectToDatabase()
