@@ -142,4 +142,28 @@ router.get('/getrelateditems', (req, res) => {
     });
 });
 
+router.post('/addreview/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+
+  console.log('id', id)
+  const reviewDoc = {
+    name: req.body.name,
+    comment: req.body.comment,
+    stars: Number(req.body.stars),
+    date: Date.now()
+  }
+
+  connectToDatabase()
+    .then((db) => {
+      db.collection('item').updateOne({ _id: id }, { $push: { reviews: reviewDoc }}, (err, doc) => {
+        if (err) {
+          return res.status(500).send(`Error saving to database with error: ${err}`);
+        }
+
+        res.send(doc);
+      })
+    })
+
+});
+
 module.exports = router;

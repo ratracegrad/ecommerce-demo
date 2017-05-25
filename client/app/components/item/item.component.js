@@ -5,6 +5,7 @@ const itemController = function($scope, $stateParams, databaseService) {
   $scope.numReviews = 0;
   $scope.reviews = [];
   $scope.relatedItems = [];
+  $scope.review = {};
 
   loadItem();
   loadRelatedItems();
@@ -41,6 +42,23 @@ const itemController = function($scope, $stateParams, databaseService) {
   $scope.getNumStars = function(num) {
     return $scope.stars > num ? 'glyphicon glyphicon-star' : 'glyphicon glyphicon-star-empty';
   }
+
+  $scope.submitReview = function(id, review) {
+    $scope.review = angular.copy(review);
+    databaseService.addReview(id, review)
+      .then(() => {
+        $scope.review = {}; // reset to clear out current values
+        loadItem();
+        loadRelatedItems();
+      })
+      .catch((err) => {
+        $scope.review = {}; // reset to clear out current values
+        loadItem();
+        loadRelatedItems();
+      })
+
+  }
+
 };
 
 angular.module('myApp')

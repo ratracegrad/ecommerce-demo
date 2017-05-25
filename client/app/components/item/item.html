@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <ol class="breadcrumb">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/?category={{item.category}}">{{item.category}}</a></li>
+                    <li><a ng-click="changeCategory(item.category)">{{item.category}}</a></li>
                     <li class="active">{{item.title}}</li>
                 </ol>
             </div>
@@ -92,34 +92,37 @@
         <div class="well">
             <h4>Add a Review:</h4>
             <!--<form action="/item/{{item._id}}/reviews" role="form" method="post">-->
-            <form >
+            <form name="newReview"  novalidate>
                 <div class="form-group">
                     <label for="review">Review:</label>
-                    <textarea name="review" id="review" class="form-control" rows="3"></textarea>
+                    <textarea name="review" id="review" class="form-control" rows="3" ng-model="review.comment" required></textarea>
+                    <p ng-show="newReview.review.$invalid && !newReview.review.$pristine" class="help-block">A review is required</p>
                 </div>
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter display name">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter display name" ng-model="review.name" required>
+                    <p ng-show="newReview.name.$invalid && !newReview.name.$pristine" class="help-block">Your name is required</p>
                 </div>
                 <div class="form-group">
 
                     <label class="radio-inline">
-                        <input type="radio" name="stars" id="stars1" value="1"> 1 star
+                        <input type="radio" name="stars" id="stars1" value="1" ng-model="review.stars" required> 1 star
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="stars" id="stars2" value="2"> 2 star
+                        <input type="radio" name="stars" id="stars2" value="2" ng-model="review.stars" required> 2 star
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="stars" id="stars3" value="3"> 3 star
+                        <input type="radio" name="stars" id="stars3" value="3" ng-model="review.stars" required> 3 star
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="stars" id="stars4" value="4"> 4 star
+                        <input type="radio" name="stars" id="stars4" value="4" ng-model="review.stars" required> 4 star
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="stars" id="stars5" value="5" checked> 5 star
+                        <input type="radio" name="stars" id="stars5" value="5" ng-model="review.stars" required> 5 star
                     </label>
+                    <p ng-show="newReview.stars.$invalid && !newReview.stars.$pristine" class="help-block">A star rating is required</p>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit Review</button>
+                <button type="submit" ng-click="submitReview(item._id, review)" class="btn btn-primary" ng-disabled="newReview.$invalid">Submit Review</button>
             </form>
         </div>
 

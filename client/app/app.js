@@ -4,7 +4,8 @@ const databaseService = function($http, $q) {
     getItems: getItems,
     getNumItems: getNumItems,
     getItem: getItem,
-    getRelatedItems: getRelatedItems
+    getRelatedItems: getRelatedItems,
+    addReview: addReview
   });
 
   function getCategories() {
@@ -47,6 +48,16 @@ const databaseService = function($http, $q) {
     const request = $http({
       method: 'get',
       url: '/api/getrelateditems'
+    });
+
+    return (request.then(handleSuccess, handleError));
+  }
+
+  function addReview(id, review) {
+    const request = $http({
+      method: 'post',
+      url: `/api/addreview/${id}`,
+      data: review
     });
 
     return (request.then(handleSuccess, handleError));
