@@ -1,8 +1,10 @@
-const mainController = function($scope, databaseService) {
+const mainController = function($scope, databaseService, $location) {
+  const params = $location.search()
   $scope.categories = [];
   $scope.items = [];
   $scope.currentPage = 0;
-  $scope.currentCategory = "All";
+  $scope.currentCategory = params.category || "All";
+  console.log('currentCategory', $scope.currentCategory);
   $scope.itemsPerPage = 5;
   $scope.numItems = 0;
   $scope.numPages = 1;
