@@ -63,3 +63,5 @@ typings/
 # IntelliJ files
 .idea
 
+.DS_Store
+
