@@ -4,7 +4,6 @@ const mainController = function($scope, databaseService, $location) {
   $scope.items = [];
   $scope.currentPage = 0;
   $scope.currentCategory = params.category || "All";
-  console.log('currentCategory', $scope.currentCategory);
   $scope.itemsPerPage = 5;
   $scope.numItems = 0;
   $scope.numPages = 1;
@@ -14,6 +13,7 @@ const mainController = function($scope, databaseService, $location) {
   loadCategories();
   loadItems();
   loadNumItems();
+  saveGuid();
 
   function loadCategories() {
     databaseService.getCategories()
@@ -37,6 +37,10 @@ const mainController = function($scope, databaseService, $location) {
       })
   }
 
+  function saveGuid() {
+    databaseService.saveGuid();
+  }
+
   $scope.getPage = (n) => {
     $scope.currentPage = n - 1;
     loadItems();
@@ -48,7 +52,7 @@ const mainController = function($scope, databaseService, $location) {
       arr.push(i);
     }
     return arr;
-  }
+  };
 
   $scope.changeCategory = function(newCategory) {
     $scope.currentCategory = newCategory;

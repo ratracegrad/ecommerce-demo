@@ -59,6 +59,19 @@ const itemController = function($scope, $stateParams, databaseService) {
 
   }
 
+  $scope.addToCart = function(itemId) {
+    const userId = databaseService.loadGuid();
+    console.log('userId', userId);
+
+    databaseService.addToCart(itemId, userId)
+      .then((data) => {
+
+      })
+
+    // TODO
+
+  }
+
 };
 
 angular.module('myApp')

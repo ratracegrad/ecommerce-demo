@@ -5,7 +5,10 @@ const databaseService = function($http, $q) {
     getNumItems: getNumItems,
     getItem: getItem,
     getRelatedItems: getRelatedItems,
-    addReview: addReview
+    addReview: addReview,
+    loadGuid: loadGuid,
+    saveGuid: saveGuid,
+    addToCart: addToCart
   });
 
   function getCategories() {
@@ -63,6 +66,35 @@ const databaseService = function($http, $q) {
     return (request.then(handleSuccess, handleError));
   }
 
+  function addToCart(itemId, userId) {
+    const request = $http({
+      method: 'post',
+      url: `/api/addtocart/${itemId}/${userId}`
+    });
+
+    return (request.then(handleSuccess, handleError));
+  }
+
+  function createGuid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return (s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4()).toString();
+  }
+
+  function loadGuid() {
+    return localStorage.getItem('ecommerceDemo')
+  }
+
+  function saveGuid() {
+    if (localStorage.getItem('ecommerceDemo') === null) {
+      localStorage.setItem('ecommerceDemo', createGuid() );
+    }
+  }
+
   /* send failure message back to application */
   function handleError( response ) {
     // The API response from the server should be returned in a
@@ -86,7 +118,7 @@ const databaseService = function($http, $q) {
 }
 
 angular.module('myApp', ['ui.router'])
-  .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
       .otherwise('/');
 

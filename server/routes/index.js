@@ -145,13 +145,12 @@ router.get('/getrelateditems', (req, res) => {
 router.post('/addreview/:id', (req, res) => {
   const id = parseInt(req.params.id);
 
-  console.log('id', id)
   const reviewDoc = {
     name: req.body.name,
     comment: req.body.comment,
     stars: Number(req.body.stars),
     date: Date.now()
-  }
+  };
 
   connectToDatabase()
     .then((db) => {
@@ -164,6 +163,91 @@ router.post('/addreview/:id', (req, res) => {
       })
     })
 
+});
+
+router.get('/cart/:userId', (req, res) => {
+  const userId = parseInt(req.params.userId);
+
+  connectToDatabase()
+    .then((db) => {
+      db.collection('cart').findOne({ userId: userId }, (err, docs) => {
+        if (err) {
+          return res.status(500).send(`Error finding document in database with error: ${err}`);
+        }
+
+        res.json(docs);
+      })
+    })
+});
+
+router.post('/cart/:userId/:itemId', (req, res) => {
+  const userId = parseInt(req.params.userId);
+  const itemId = parseInt(req.params.itemId);
+
+  connectToDatabase()
+    .then((db) => {
+      db.collection('cart').findOne({userId: userId}, (err, doc) => {
+        if (err) {
+          return res.status(500).send(`Error in finding document in database with error: ${err}`);
+        }
+
+        res.json(doc);
+      })
+    });
+
+});
+
+router.post('/addtocart/:itemId/:userId', (req, res) => {
+  const userId = req.params.userId;
+  const itemId = parseInt(req.params.itemId);
+
+  connectToDatabase()
+    .then((db) => {
+      db.collection('cart').aggregate([
+        { $match: { userId: userId }},
+        { $unwind: '$items' },
+        { $match: { 'items._id': itemId } }
+      ], ((err, doc) => {
+        if (err) {
+          return res.status(500).send(`Error retrieving document from database with error: ${err}`);
+        }
+
+        if (doc.length) {
+          const quantity = doc[0].items.quantity + 1;
+          db.collection('cart').findOneAndUpdate(
+            { userId: userId, "items._id": itemId },
+            { $set: { "items.$.quantity": quantity } },
+            { upsert: true, returnOriginal: false },
+            ((err, doc) => {
+              res.send(doc.value);
+            })
+          )
+        } else {
+          db.collection('item').findOne({ _id: itemId }, ((err, item) => {
+            if (err) {
+              return res.status(500).send(`Error finding document in database with error: ${err}`);
+            }
+
+            item.quantity = 1;
+            db.collection('cart').findOneAndUpdate(
+              {userId: userId},
+              {"$push": {items: item}},
+              {
+                upsert: true,
+                returnOriginal: false
+              }, ((err, result) => {
+                if (err) {
+                  return res.status(500).send(`Error updating document in database with error: ${err}`);
+                }
+
+                res.send(result.value);
+              })
+            )
+          }))
+
+        }
+      }));
+    })
 });
 
 module.exports = router;
