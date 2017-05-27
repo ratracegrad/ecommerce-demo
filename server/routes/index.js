@@ -166,7 +166,7 @@ router.post('/addreview/:id', (req, res) => {
 });
 
 router.get('/cart/:userId', (req, res) => {
-  const userId = parseInt(req.params.userId);
+  const userId = req.params.userId;
 
   connectToDatabase()
     .then((db) => {

@@ -8,7 +8,8 @@ const databaseService = function($http, $q) {
     addReview: addReview,
     loadGuid: loadGuid,
     saveGuid: saveGuid,
-    addToCart: addToCart
+    addToCart: addToCart,
+    getCart: getCart
   });
 
   function getCategories() {
@@ -70,6 +71,15 @@ const databaseService = function($http, $q) {
     const request = $http({
       method: 'post',
       url: `/api/addtocart/${itemId}/${userId}`
+    });
+
+    return (request.then(handleSuccess, handleError));
+  }
+
+  function getCart(userId) {
+    const request = $http({
+      method: 'get',
+      url: `/api/cart/${userId}`
     });
 
     return (request.then(handleSuccess, handleError));
