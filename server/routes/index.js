@@ -180,6 +180,21 @@ router.get('/cart/:userId', (req, res) => {
     })
 });
 
+router.get('/search/:queryFilter', (req, res) => {
+  const queryFilter = req.params.queryFilter;
+
+  connectToDatabase()
+    .then((db) => {
+      db.collection('item').find({ $text: { $search: queryFilter }}).toArray((err, docs) => {
+        if (err) {
+          return res.status(500).send(`Error retrieving from database with error: ${err}`);
+        }
+
+        res.send(docs);
+      })
+    })
+});
+
 router.post('/cart/:userId/:itemId', (req, res) => {
   const userId = parseInt(req.params.userId);
   const itemId = parseInt(req.params.itemId);
