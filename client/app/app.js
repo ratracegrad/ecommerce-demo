@@ -9,7 +9,8 @@ const databaseService = function($http, $q) {
     loadGuid: loadGuid,
     saveGuid: saveGuid,
     addToCart: addToCart,
-    getCart: getCart
+    getCart: getCart,
+    findSearchItems: findSearchItems
   });
 
   function getCategories() {
@@ -83,6 +84,15 @@ const databaseService = function($http, $q) {
     });
 
     return (request.then(handleSuccess, handleError));
+  }
+
+  function findSearchItems(queryFilter) {
+    const request = $http({
+      method: 'get',
+      url: `api/search/${queryFilter}`
+    });
+
+    return(request.then(handleSuccess, handleError));
   }
 
   function createGuid() {
