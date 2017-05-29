@@ -48,15 +48,12 @@
                     <strong>Price: {{item.price | currency }}</strong>
                 </p>
 
-                <!--<form action="/user/{{userId}}/cart/items/{{item._id}}" role="form" method="post">-->
-                <!--<form name="cartAddition" novalidate>-->
                 <a ui-sref="cart">
                     <button class="btn btn-primary" type="submit" ng-click="addToCart(item._id)">
                         Add to cart
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </button>
                 </a>
-                <!--</form>-->
 
             </div>
 

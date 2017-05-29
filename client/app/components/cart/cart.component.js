@@ -1,5 +1,6 @@
 const cartController = function($scope, $stateParams, databaseService) {
   $scope.guid = databaseService.guidHandler('load');
+  $scope.cart = [];
 
   getCartContents();
 

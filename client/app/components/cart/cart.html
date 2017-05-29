@@ -27,7 +27,7 @@
                 </thead>
                 <tbody>
 
-                <tr ng-repeat="item in cart.items">
+                <tr ng-repeat="item in cart.items" ng-model="cart">
                     <td>{{item.title}}</td>
                     <td class="muted center_text"><img width="300" ng-src="{{item.img_url}}"></td>
                     <td>{{item.quantity}}</td>
