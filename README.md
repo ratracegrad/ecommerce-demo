@@ -23,3 +23,30 @@ Here are screenshots that show the E-commerce demo application in use.
 
 **Shopping Cart**
 ![Shopping Cart](/screenshots/shoppingCart.png?raw=true "Shopping Cart")
+
+## Getting Started
+To get started  you can simply clone this `ecommerce-demo` repository and install the dependencies.
+
+Clone the `ecommerce-demo` repository using git:
+
+```bash
+git clone https://github.com/ratracegrad/ecommerce-demo
+cd ecommerce-demo
+```
+
+Install dependencies with this command:
+```bash
+npm install
+```
+
+Run the application with this command:
+```bash
+npm start
+```
+
+## Tech Stack
+* AngularJS
+* Node.js
+* Express.js
+* Bootstrap
+* ui-Router
