@@ -4,7 +4,7 @@ const searchController = function($scope, databaseService, $location) {
   loadSearchItems();
 
   function loadSearchItems() {
-    databaseService.findSearchItems($scope.queryString)
+    databaseService.getFromDatabase(`api/search/${$scope.queryString}`)
       .then((items) => {
         $scope.items = items;
       })

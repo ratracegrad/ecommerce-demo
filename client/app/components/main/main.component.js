@@ -16,21 +16,21 @@ const mainController = function($scope, databaseService, $location) {
   saveGuid();
 
   function loadCategories() {
-    databaseService.getCategories()
+    databaseService.getFromDatabase("/api/categories")
       .then((categories) => {
         $scope.categories = categories;
       })
   }
 
   function loadItems() {
-    databaseService.getItems($scope.currentCategory, $scope.currentPage, $scope.itemsPerPage)
+    databaseService.getFromDatabase(`/api/getitems?category=${$scope.currentCategory}&&page=${$scope.currentPage}&&limit=${$scope.itemsPerPage}`)
       .then((items) => {
         $scope.items = items;
       });
   }
 
   function loadNumItems() {
-    databaseService.getNumItems($scope.currentCategory)
+    databaseService.getFromDatabase(`/api/getnumitems?currentCategory=${$scope.currentCategory}`)
       .then((numItems) => {
         $scope.numItems = numItems.count;
         $scope.numPages = Math.ceil(Number($scope.numItems / $scope.itemsPerPage));
@@ -38,7 +38,7 @@ const mainController = function($scope, databaseService, $location) {
   }
 
   function saveGuid() {
-    databaseService.saveGuid();
+    databaseService.guidHandler('save');
   }
 
   $scope.getPage = (n) => {

@@ -1,122 +1,59 @@
 const databaseService = function($http, $q) {
   return({
-    getCategories: getCategories,
-    getItems: getItems,
-    getNumItems: getNumItems,
-    getItem: getItem,
-    getRelatedItems: getRelatedItems,
-    addReview: addReview,
-    loadGuid: loadGuid,
-    saveGuid: saveGuid,
-    addToCart: addToCart,
-    getCart: getCart,
-    findSearchItems: findSearchItems
+    getFromDatabase: getFromDatabase,
+    postToDatabase: postToDatabase,
+    guidHandler: guidHandler
   });
 
-  function getCategories() {
-    const request = $http({
-      method: "get",
-      url: "/api/categories"
-    });
-
-    return (request.then(handleSuccess, handleError));
-  }
-
-  function getItems(currentCategory, page, itemsPerPage) {
-    const request = $http({
-      method: "get",
-      url: `/api/getitems?category=${currentCategory}&&page=${page}&&limit=${itemsPerPage}`
-    });
-
-    return (request.then(handleSuccess, handleError));
-  }
-
-  function getNumItems(currentCategory) {
-    const request = $http({
-      method: "get",
-      url: `/api/getnumitems?currentCategory=${currentCategory}`
-    });
-
-    return (request.then(handleSuccess, handleError));
-  }
-
-  function getItem(itemId) {
-    const request = $http({
-      method: "get",
-      url: `/api/getitem/${itemId}`
-    });
-
-    return (request.then(handleSuccess, handleError));
-  }
-
-  function getRelatedItems() {
+  /* this function is used to get data from mongodb database */
+  function getFromDatabase(url) {
     const request = $http({
       method: 'get',
-      url: '/api/getrelateditems'
+      url: url
     });
 
-    return (request.then(handleSuccess, handleError));
+    return (request.then(_handleSuccess, _handleError));
   }
 
-  function addReview(id, review) {
+  /* this function is used to add data to mongodb database  */
+  function postToDatabase(url, data) {
     const request = $http({
       method: 'post',
-      url: `/api/addreview/${id}`,
-      data: review
-    });
+      url: url,
+      data: data
+    })  ;
 
-    return (request.then(handleSuccess, handleError));
+    return (request.then(_handleSuccess, _handleError));
   }
 
-  function addToCart(itemId, userId) {
-    const request = $http({
-      method: 'post',
-      url: `/api/addtocart/${itemId}/${userId}`
-    });
-
-    return (request.then(handleSuccess, handleError));
-  }
-
-  function getCart(userId) {
-    const request = $http({
-      method: 'get',
-      url: `/api/cart/${userId}`
-    });
-
-    return (request.then(handleSuccess, handleError));
-  }
-
-  function findSearchItems(queryFilter) {
-    const request = $http({
-      method: 'get',
-      url: `api/search/${queryFilter}`
-    });
-
-    return(request.then(handleSuccess, handleError));
-  }
-
-  function createGuid() {
-    function s4() {
-      return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-    }
-    return (s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-      s4() + '-' + s4() + s4() + s4()).toString();
-  }
-
-  function loadGuid() {
-    return localStorage.getItem('ecommerceDemo')
-  }
-
-  function saveGuid() {
-    if (localStorage.getItem('ecommerceDemo') === null) {
-      localStorage.setItem('ecommerceDemo', createGuid() );
+  /* this function handles creating, saving or retrieving guid */
+  function guidHandler(action) {
+    switch (action) {
+      case 'create':
+        return (_s4() + _s4() + '-' + _s4() + '-' + _s4() + '-' +
+        _s4() + '-' + _s4() + _s4() + _s4()).toString();
+        break;
+      case 'load':
+        return localStorage.getItem('ecommerceDemo')
+        break;
+      case 'save':
+        if (localStorage.getItem('ecommerceDemo') === null) {
+          localStorage.setItem('ecommerceDemo', createGuid() );
+        }
+        break;
     }
   }
 
-  /* send failure message back to application */
-  function handleError( response ) {
+  /* -------------------------------
+   * Helper private methods below
+   * -------------------------------*/
+  function _s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+
+  function _handleError( response ) {
     // The API response from the server should be returned in a
     // normalized format. However, if the request was not handled by the
     // server (or what not handles properly - ex. server error), then we
@@ -131,8 +68,7 @@ const databaseService = function($http, $q) {
     return( $q.reject( response.data.message ) );
   }
 
-  /* $http call successful so unwrap application data from API response payload */
-  function handleSuccess( response ) {
+  function _handleSuccess( response ) {
     return( response.data );
   }
 }

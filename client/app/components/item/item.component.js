@@ -11,14 +11,14 @@ const itemController = function($scope, $stateParams, databaseService) {
   loadRelatedItems();
 
   function loadRelatedItems() {
-    databaseService.getRelatedItems()
+    databaseService.getFromDatabase('/api/getrelateditems')
       .then((items) => {
         $scope.relatedItems = items;
       })
   }
 
   function loadItem() {
-    databaseService.getItem($scope.itemId)
+    databaseService.getFromDatabase(`/api/getitem/${$scope.itemId}`)
       .then((item) => {
         $scope.item = item;
 
@@ -45,7 +45,7 @@ const itemController = function($scope, $stateParams, databaseService) {
 
   $scope.submitReview = function(id, review) {
     $scope.review = angular.copy(review);
-    databaseService.addReview(id, review)
+    databaseService.postToDatabase(`/api/addreview/${id}`, review)
       .then(() => {
         $scope.review = {}; // reset to clear out current values
         loadItem();
@@ -60,15 +60,12 @@ const itemController = function($scope, $stateParams, databaseService) {
   }
 
   $scope.addToCart = function(itemId) {
-    const userId = databaseService.loadGuid();
-    console.log('userId', userId);
+    const userId = databaseService.guidHandler('load');
 
-    databaseService.addToCart(itemId, userId)
+    databaseService.postToDatabase(`/api/addtocart/${itemId}/${userId}`)
       .then((data) => {
 
       })
-
-    // TODO
 
   }
 

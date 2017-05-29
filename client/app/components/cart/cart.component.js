@@ -1,10 +1,10 @@
 const cartController = function($scope, $stateParams, databaseService) {
-  $scope.guid = databaseService.loadGuid();
+  $scope.guid = databaseService.guidHandler('load');
 
-  getCartContents($scope.guid);
+  getCartContents();
 
-  function getCartContents(userId) {
-    databaseService.getCart(userId)
+  function getCartContents() {
+    databaseService.getFromDatabase(`/api/cart/${$scope.guid}`)
       .then((data) => {
         $scope.cart = data;
       })
