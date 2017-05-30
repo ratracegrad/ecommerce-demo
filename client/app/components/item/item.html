@@ -48,12 +48,10 @@
                     <strong>Price: {{item.price | currency }}</strong>
                 </p>
 
-                <a ui-sref="cart">
-                    <button class="btn btn-primary" type="submit" ng-click="addToCart(item._id)">
-                        Add to cart
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </button>
-                </a>
+                <button class="btn btn-primary" type="submit" ng-click="addToCart(item._id)">
+                    Add to cart
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
 
             </div>
 

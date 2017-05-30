@@ -1,4 +1,4 @@
-const itemController = function($scope, $stateParams, databaseService) {
+const itemController = function($scope, $stateParams, databaseService, $location) {
   $scope.itemId =  Number($stateParams.itemId);
   $scope.item = {};
   $scope.stars = 0;
@@ -64,7 +64,7 @@ const itemController = function($scope, $stateParams, databaseService) {
 
     databaseService.postToDatabase(`/api/addtocart/${itemId}/${userId}`)
       .then((data) => {
-
+        $location.path('/cart')
       })
 
   }
