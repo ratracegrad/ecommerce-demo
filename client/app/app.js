@@ -30,15 +30,14 @@ const databaseService = function($http, $q) {
   function guidHandler(action) {
     switch (action) {
       case 'create':
-        return (_s4() + _s4() + '-' + _s4() + '-' + _s4() + '-' +
-        _s4() + '-' + _s4() + _s4() + _s4()).toString();
+        return _createGuid()
         break;
       case 'load':
         return localStorage.getItem('ecommerceDemo')
         break;
       case 'save':
         if (localStorage.getItem('ecommerceDemo') === null) {
-          localStorage.setItem('ecommerceDemo', createGuid() );
+          localStorage.setItem('ecommerceDemo', _createGuid() );
         }
         break;
     }
@@ -51,6 +50,11 @@ const databaseService = function($http, $q) {
     return Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)
       .substring(1);
+  }
+
+  function _createGuid() {
+      return (_s4() + _s4() + '-' + _s4() + '-' + _s4() + '-' +
+      _s4() + '-' + _s4() + _s4() + _s4()).toString();
   }
 
   function _handleError( response ) {
