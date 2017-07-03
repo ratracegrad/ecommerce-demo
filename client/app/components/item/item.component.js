@@ -41,7 +41,7 @@ const itemController = function($scope, $stateParams, databaseService, $location
 
   $scope.getNumStars = function(num) {
     return $scope.stars > num ? 'glyphicon glyphicon-star' : 'glyphicon glyphicon-star-empty';
-  }
+  };
 
   $scope.submitReview = function(id, review) {
     $scope.review = angular.copy(review);
@@ -57,7 +57,7 @@ const itemController = function($scope, $stateParams, databaseService, $location
         loadRelatedItems();
       })
 
-  }
+  };
 
   $scope.addToCart = function(itemId) {
     const userId = databaseService.guidHandler('load');

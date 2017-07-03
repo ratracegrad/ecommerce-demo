@@ -1,5 +1,5 @@
 const mainController = function($scope, databaseService, $location) {
-  const params = $location.search()
+  const params = $location.search();
   $scope.categories = [];
   $scope.items = [];
   $scope.currentPage = 0;

@@ -30,10 +30,10 @@ const databaseService = function($http, $q) {
   function guidHandler(action) {
     switch (action) {
       case 'create':
-        return _createGuid()
+        return _createGuid();
         break;
       case 'load':
-        return localStorage.getItem('ecommerceDemo')
+        return localStorage.getItem('ecommerceDemo');
         break;
       case 'save':
         if (localStorage.getItem('ecommerceDemo') === null) {
@@ -62,10 +62,7 @@ const databaseService = function($http, $q) {
     // normalized format. However, if the request was not handled by the
     // server (or what not handles properly - ex. server error), then we
     // may have to normalize it on our end, as best we can.
-    if (
-      ! angular.isObject( response.data ) ||
-      ! response.data.message
-    ) {
+    if (!angular.isObject( response.data ) || !response.data.message ) {
       return( $q.reject( "An unknown error occurred." ) );
     }
     // Otherwise, use expected error message.
@@ -75,7 +72,7 @@ const databaseService = function($http, $q) {
   function _handleSuccess( response ) {
     return( response.data );
   }
-}
+};
 
 angular.module('myApp', ['ui.router'])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -85,7 +82,7 @@ angular.module('myApp', ['ui.router'])
     $locationProvider.html5Mode(true);
 
   })
-  .service('databaseService', databaseService)
+  .service('databaseService', databaseService);
 
 
  

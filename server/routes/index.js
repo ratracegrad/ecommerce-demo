@@ -115,7 +115,7 @@ router.get('/getitem/:id', (req, res) => {
         }
 
         res.json(doc);
-      })
+      });
     })
     .catch((err) => {
       res.status(500).send(`Error connecting to database: ${err}`);

@@ -18,7 +18,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
+  const bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
 
@@ -36,8 +36,8 @@ function onError(error) {
       throw error;
   }
 
-};
+}
 
 function onListening() {
   console.log(`Server listening on port ${port}`);
-};
+}
