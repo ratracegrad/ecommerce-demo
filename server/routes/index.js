@@ -3,11 +3,11 @@
 require('dotenv').config();
 const router = require('express').Router();
 const MongoClient = require('mongodb').MongoClient;
-const dbURI = process.env.MONGODB_URI;
+const dbURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/ecommerce';
 
 const connectToDatabase = () => {
   return new Promise((resolve, reject) => {
-
+    console.log('dbURI', dbURI)
     MongoClient.connect(dbURI, (err, db) => {
       if (err) {
         reject(err)
