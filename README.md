@@ -6,7 +6,7 @@ click on any product to get more information including pricing, reviews and rati
 add them to their shopping cart
 
 ## Import Data
-I have included a file ecommerce.zip in this repo. If you expand this zip file, it will create a new folder called ecommerce.  Inside that folder will be 2 folders called cart and item. These 2 folders contain a mongodump of the 2 collections that I use in this ecommerce demo. If you do a mongoimport of these 2 dumps then you will have the same content that I have for this demo.
+I have included a data folder in this repo. Inside that folder will be 2 folders called cart and item. These 2 folders contain a mongodump of the 2 collections that I use in this ecommerce demo. You can use the [import-data.sh](data/import-data.sh) script to import these 2 dumps to an ecommerce database, then you will have the same content that I have for this demo.
 
 ## Live Demonstration
 
